@@ -1,0 +1,20 @@
+name: Build Project
+on: [push]
+jobs:
+  build:
+    name: Build & publish
+    runs-on: ubuntu-16.04
+    steps:
+      - name: Shallow Clone (depth=1)
+        uses: actions/checkout@master
+        with:
+          fetch-depth: 1
+
+      - name: Restore packages
+        run: dotnet restore
+
+      - name: Build with dotnet
+        run: dotnet build -c Release -o ./build
+      
+      - name: Run tests
+        run: dotnet test    
