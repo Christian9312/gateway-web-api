@@ -12,8 +12,10 @@ namespace Gateways.Domain.Mapping
     {
         public ModelToDtoProfile()
         {
-            CreateMap<Peripheral,PeripheralDetailedDto>();
-            CreateMap<Peripheral,PeripheralSimpleDto>();
+            CreateMap<Peripheral,PeripheralDetailedDto>().ForMember(src => src.Status,
+                opt => opt.MapFrom(src => src.Status.ToDescriptionString()));
+            CreateMap<Peripheral,PeripheralSimpleDto>().ForMember(src => src.Status,
+                opt => opt.MapFrom(src => src.Status.ToDescriptionString()));
             CreateMap<Gateway, GatewayCreationDto>();
             CreateMap<Gateway, GatewayDetailedDto>();
             CreateMap<Gateway, GatewaySimpleDto>();
