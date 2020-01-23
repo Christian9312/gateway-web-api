@@ -53,7 +53,7 @@ namespace Gateways.Domain.Contexts
             {
                 SerialNumber = gatewayIds[i],
                 Address = $"192.168.1.{new Random().Next(0, 255)}",
-                Name = "Gateway 1"
+                Name = $"Gateway {i}"
             }).ToList();
 
 
