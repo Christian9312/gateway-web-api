@@ -26,15 +26,15 @@ namespace Gateways.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult> GetPeripheral()
+        public async Task<ActionResult<IEnumerable<PeripheralDetailedDto>>> GetPeripherals()
         {
-            var gateways = await repoWrapper.Peripheral.GetAllPeripherals();
-            var mappedGateway = mapper.Map<IEnumerable<PeripheralDetailedDto>>(gateways);
-            return Ok(mappedGateway);
+            var peripherals = await repoWrapper.Peripheral.GetAllPeripherals();
+            var mappedPeripheral = mapper.Map<IEnumerable<PeripheralDetailedDto>>(peripherals);
+            return Ok(mappedPeripheral);
         }
 
         [HttpGet("{id}",Name ="PeripheralById")]
-        public async Task<ActionResult> GetPeripheralById(int id)
+        public async Task<ActionResult<PeripheralDetailedDto>> GetPeripheralById(uint id)
         {
             var peripheral = await repoWrapper.Peripheral.GetPeripheralById(id);
             if (peripheral == null)
@@ -75,7 +75,7 @@ namespace Gateways.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult> UpdateGateway(int id, [FromBody] PeripheralCreationDto peripheralDto)
+        public async Task<ActionResult> UpdateGateway(uint id, [FromBody] PeripheralCreationDto peripheralDto)
         {
             if (peripheralDto == null)
             {
@@ -110,7 +110,7 @@ namespace Gateways.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<ActionResult> DeleteGateway(int id)
+        public async Task<ActionResult> DeleteGateway(uint id)
         {
             var peripheralEntity = await repoWrapper.Peripheral.GetPeripheralById(id);
             if (peripheralEntity == null)

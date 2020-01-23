@@ -9,7 +9,7 @@ namespace Gateways.Domain.Contracts
     {
         Task<IEnumerable<Peripheral>> GetAllPeripherals();
 
-        Task<Peripheral> GetPeripheralById(int id);
+        Task<Peripheral> GetPeripheralById(uint id);
         Task<IEnumerable<Peripheral>> GetPeripheralByGateways(string gatewayNumber);
 
     }

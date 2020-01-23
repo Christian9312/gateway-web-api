@@ -42,7 +42,7 @@ namespace Gateways.Controllers
         }
 
         [HttpPost(Name ="GatewayCreation")]
-        public async Task<ActionResult> CreateGateway([FromBody] GatewayCreateDto gatewayDto)
+        public async Task<ActionResult> CreateGateway([FromBody] GatewayCreationDto gatewayDto)
         {
             if (gatewayDto == null)
             {
@@ -61,7 +61,7 @@ namespace Gateways.Controllers
             if (!result.Success)
                 return BadRequest(result.Message);
 
-            var gatewayResult = mapper.Map<Gateway, GatewayCreateDto>(gatewayEntity);
+            var gatewayResult = mapper.Map<Gateway, GatewayCreationDto>(gatewayEntity);
 
             return CreatedAtRoute("GatewayById",new {id = gatewayEntity.SerialNumber},gatewayResult);
         }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using Gateways.Domain.Extensions;
 using Gateways.Domain.Resources;
 
 namespace Gateways.Domain.Mapping
@@ -13,7 +14,7 @@ namespace Gateways.Domain.Mapping
         {
             CreateMap<Peripheral,PeripheralDetailedDto>();
             CreateMap<Peripheral,PeripheralSimpleDto>();
-            CreateMap<Gateway, GatewayCreateDto>();
+            CreateMap<Gateway, GatewayCreationDto>();
             CreateMap<Gateway, GatewayDetailedDto>();
             CreateMap<Gateway, GatewaySimpleDto>();
         }

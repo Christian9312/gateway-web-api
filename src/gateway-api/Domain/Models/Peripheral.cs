@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -11,7 +12,7 @@ namespace Gateways.Domain
     public class Peripheral
     {
         [Required(ErrorMessage = "UID is required")]
-        public int UId { get; set; }
+        public uint UId { get; set; }
 
         [StringLength(60, ErrorMessage = "Vendor can't be longer than 60 characters")]
         public string Vendor { get; set; }
@@ -30,7 +31,11 @@ namespace Gateways.Domain
 
     public enum PeripheralStatus
     {
+
+        [Description("Offline")]
         Offline,
+
+        [Description("Online")]
         Online
     }
 }

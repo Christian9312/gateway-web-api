@@ -14,7 +14,7 @@ namespace Gateways.Domain.Mapping
             CreateMap<PeripheralDetailedDto, Peripheral>();
             CreateMap<PeripheralCreationDto, Peripheral>();
             CreateMap<GatewayDetailedDto, Gateway>();
-            CreateMap<GatewayCreateDto, Gateway>();
+            CreateMap<GatewayCreationDto, Gateway>();
             CreateMap<GatewayUpdateDto, Gateway>();
         }
     }

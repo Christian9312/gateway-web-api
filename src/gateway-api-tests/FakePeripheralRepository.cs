@@ -11,12 +11,20 @@ namespace gateway_api_tests
 {
     public class FakePeripheralRepository:IPeripheralRepository
     {
-        private Dictionary<int, Peripheral> DbContext { get; } = new Dictionary<int, Peripheral>
+        private Dictionary<uint, Peripheral> DbContext { get; } = new Dictionary<uint, Peripheral>
         {
-            {323123, new Peripheral{} },
-            {4343443, new Peripheral{} },
-            {5454354, new Peripheral{}},
-            {5667677, new Peripheral{}}
+            {3231232, new Peripheral{UId =3231232, Vendor = "My Enterprise", Status = PeripheralStatus.Online, CreationDate = DateTimeOffset.Now,GatewayId = "4451-9834-7885-3446"}},
+            {4343443, new Peripheral{UId =4343443, Vendor = "Your Enterprise", Status = PeripheralStatus.Offline, CreationDate = DateTimeOffset.Now,GatewayId = "8763-3242-3343-8898"}},
+            {5454354, new Peripheral{UId =5454354, Vendor = "Their Enterprise", Status = PeripheralStatus.Online, CreationDate = DateTimeOffset.Now,GatewayId = "5654-5653-3423-6675"}},
+            {5667677, new Peripheral{UId =5667677, Vendor = "Enterprise SA", Status = PeripheralStatus.Offline, CreationDate = DateTimeOffset.Now,GatewayId = "8763-3242-3343-8898"}},
+            {7857677, new Peripheral{UId =7857677, Vendor = "Enterprise SA", Status = PeripheralStatus.Online, CreationDate = DateTimeOffset.Now,GatewayId = "8763-3242-3343-8898"}},
+            {4217547, new Peripheral{UId =4217547, Vendor = "Enterprise SA", Status = PeripheralStatus.Online, CreationDate = DateTimeOffset.Now,GatewayId = "8763-3242-3343-8898"}},
+            {0866527, new Peripheral{UId =0866527, Vendor = "Your Enterprise", Status = PeripheralStatus.Online, CreationDate = DateTimeOffset.Now,GatewayId = "8763-3242-3343-8898"}},
+            {1367657, new Peripheral{UId =1367657, Vendor = "Your Enterprise", Status = PeripheralStatus.Offline, CreationDate = DateTimeOffset.Now,GatewayId = "8763-3242-3343-8898"}},
+            {3466767, new Peripheral{UId =3466767, Vendor = "My Enterprise", Status = PeripheralStatus.Online, CreationDate = DateTimeOffset.Now,GatewayId = "8763-3242-3343-8898"}},
+            {3733673, new Peripheral{UId =3733673, Vendor = "My Enterprise", Status = PeripheralStatus.Online, CreationDate = DateTimeOffset.Now,GatewayId = "8763-3242-3343-8898"}},
+            {1233677, new Peripheral{UId =1233677, Vendor = "Their Enterprise", Status = PeripheralStatus.Offline, CreationDate = DateTimeOffset.Now,GatewayId = "8763-3242-3343-8898"}},
+            {5434677, new Peripheral{UId =5434677, Vendor = "Their Enterprise", Status = PeripheralStatus.Offline, CreationDate = DateTimeOffset.Now,GatewayId = "8763-3242-3343-8898"}}
         };
 
         public IQueryable<Peripheral> FindAll()
@@ -52,7 +60,7 @@ namespace gateway_api_tests
             return  await Task.FromResult(FindAll().OrderBy(peripheral => peripheral.Vendor));
         }
 
-        public async Task<Peripheral> GetPeripheralById(int id)
+        public async Task<Peripheral> GetPeripheralById(uint id)
         {
             return await Task.FromResult(FindByCondition(peripheral => peripheral.UId == id).FirstOrDefault()) ;
         }

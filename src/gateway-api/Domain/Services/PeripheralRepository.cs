@@ -20,9 +20,9 @@ namespace Gateways.Domain.Services
             return await FindAll().OrderBy(peripheral => peripheral.Vendor).Include(x=> x.Gateway).ToListAsync();
         }
 
-        public async Task<Peripheral> GetPeripheralById(int id)
+        public async Task<Peripheral> GetPeripheralById(uint id)
         {
-            return await FindByCondition(gateway => gateway.UId == id)
+            return await FindByCondition(gateway => gateway.UId == id).Include(x=> x.Gateway)
                 .FirstOrDefaultAsync();
         }
 

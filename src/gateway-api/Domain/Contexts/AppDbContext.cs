@@ -46,8 +46,8 @@ namespace Gateways.Domain.Contexts
 
             builder.Entity<Peripheral>().HasData
             (
-                new Peripheral() { UId = Int32.MaxValue, CreationDate = DateTimeOffset.Now, Status = PeripheralStatus.Offline, Vendor =  "ME", GatewayId = "213213213"},
-                new Peripheral() { UId = Int32.MinValue, CreationDate = DateTimeOffset.Now, Status = PeripheralStatus.Online, Vendor =  "You", GatewayId = "232323243"}
+                new Peripheral() { UId = uint.MaxValue, CreationDate = DateTimeOffset.Now, Status = PeripheralStatus.Offline, Vendor =  "ME", GatewayId = "213213213"},
+                new Peripheral() { UId = uint.MaxValue-1 , CreationDate = DateTimeOffset.Now, Status = PeripheralStatus.Online, Vendor =  "You", GatewayId = "232323243"}
             );
         }
     }

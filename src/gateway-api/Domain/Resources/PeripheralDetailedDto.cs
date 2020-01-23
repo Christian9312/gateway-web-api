@@ -11,7 +11,7 @@ namespace Gateways.Domain.Resources
     {
 
         [Required(ErrorMessage = "UID is required")]
-        public int UId { get; set; }
+        public uint UId { get; set; }
 
         [StringLength(60, ErrorMessage = "Vendor can't be longer than 60 characters")]
         public string Vendor { get; set; }
@@ -20,7 +20,7 @@ namespace Gateways.Domain.Resources
         public DateTimeOffset CreationDate { get; set; }
 
         [Required(ErrorMessage = "Status is required")]
-        public PeripheralStatus Status { get; set; }
+        public string Status { get; set; }
 
         public GatewaySimpleDto Gateway { get; set; }
     }

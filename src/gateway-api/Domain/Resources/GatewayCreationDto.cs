@@ -7,7 +7,7 @@ using Gateways.Validators;
 
 namespace Gateways.Domain.Resources
 {
-    public class GatewayCreateDto
+    public class GatewayCreationDto
     {
         [Required(ErrorMessage = "Serial number is required")]
         public string SerialNumber { get; set; }
