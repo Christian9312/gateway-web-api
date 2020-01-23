@@ -38,18 +38,38 @@ namespace Gateways.Domain.Contexts
             builder.Entity<Peripheral>().Property(p => p.CreationDate).IsRequired();
             builder.Entity<Peripheral>().Property(p => p.Status).IsRequired();
 
-            var guid = Guid.NewGuid().ToString();
-            builder.Entity<Gateway>().HasData
-            (
-                new Gateway { SerialNumber = Guid.NewGuid().ToString(), Name = "Bad gateway", Address = "192.168.1.1" , AssociatedPeripherals = new List<Peripheral>()},
-                new Gateway { SerialNumber = guid, Name = "Good gateway", Address = "192.168.1.2", AssociatedPeripherals = new List<Peripheral>()}
-            );
+            DataSeedGeneration(builder, 50);
 
-            builder.Entity<Peripheral>().HasData
-            (
-                new Peripheral() { UId = uint.MaxValue, CreationDate = DateTimeOffset.Now, Status = PeripheralStatus.Offline, Vendor =  "ME", GatewayId = guid},
-                new Peripheral() { UId = uint.MaxValue-1 , CreationDate = DateTimeOffset.Now, Status = PeripheralStatus.Online, Vendor =  "You", GatewayId = guid}
-            );
+        }
+
+        private void DataSeedGeneration(ModelBuilder builder, int quantityOfResources)
+        {
+
+            var gatewayIds = new int [quantityOfResources].Select(item => Guid.NewGuid().ToString()).ToArray();
+
+            var gateways = new int [quantityOfResources]
+                .Select((item, i) =>
+                    new Gateway
+            {
+                SerialNumber = gatewayIds[i],
+                Address = $"192.168.1.{new Random().Next(0, 255)}",
+                Name = "Gateway 1"
+            }).ToList();
+
+
+            var peripheralIds = new int [quantityOfResources].Select(item => (uint) new Random().Next(0, maxValue:int.MaxValue)).ToArray();
+
+            var peripherals = new int [quantityOfResources].Select((item, i) => new Peripheral
+            {
+                UId = peripheralIds[i],
+                Status = new Random().Next(0, 2) == 0 ? PeripheralStatus.Offline : PeripheralStatus.Online,
+                CreationDate = DateTimeOffset.UtcNow,
+                Vendor = $"Vendor {i}",
+                GatewayId = gatewayIds[new Random().Next(0,gatewayIds.Length)]
+            });
+
+            builder.Entity<Gateway>().HasData(gateways);
+            builder.Entity<Peripheral>().HasData(peripherals);
         }
     }
 }
