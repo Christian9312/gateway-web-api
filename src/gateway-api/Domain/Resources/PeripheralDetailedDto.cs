@@ -17,7 +17,7 @@ namespace Gateways.Domain.Resources
         public string Vendor { get; set; }
 
         [Required(ErrorMessage = "Date created is required")]
-        public DateTimeOffset CreationDate { get; set; }
+        public DateTimeOffset? CreationDate { get; set; }
 
         [Required(ErrorMessage = "Status is required")]
         public string Status { get; set; }

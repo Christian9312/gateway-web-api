@@ -11,17 +11,16 @@ namespace Gateways.Domain
 {
     public class Peripheral
     {
-        [Required(ErrorMessage = "UID is required")]
+        [Required]
         public uint UId { get; set; }
 
-        [StringLength(60, ErrorMessage = "Vendor can't be longer than 60 characters")]
         public string Vendor { get; set; }
 
-        [Required(ErrorMessage = "Date created is required")]
-        public DateTimeOffset CreationDate { get; set; }
+        [Required]
+        public DateTimeOffset? CreationDate { get; set; }
 
-        [Required(ErrorMessage = "Status is required")]
-        public PeripheralStatus Status { get; set; }
+        [Required]
+        public PeripheralStatus? Status { get; set; }
 
         public string GatewayId { get; set; }
         public Gateway Gateway { get; set; }
