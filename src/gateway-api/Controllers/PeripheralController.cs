@@ -92,7 +92,7 @@ namespace Gateways.Controllers
             if (peripheralEntity == null)
                 return NotFound();
 
-            var gateway = await repoWrapper.Gateway.GetGatewayById(peripheralEntity.GatewayId);
+            var gateway = await repoWrapper.Gateway.GetGatewayById(peripheralDto.GatewayId);
             if (gateway == null)
                 return BadRequest("Invalid reference to gateway");
 
