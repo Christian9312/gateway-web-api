@@ -41,8 +41,8 @@ namespace gateway_api_tests
 
         public void Create(Peripheral entity)
         {
-            if (!DbContext.ContainsKey(entity.UId))
-                DbContext.Add(entity.UId, entity);
+           var id = (uint) new Random().Next(0, maxValue:int.MaxValue);
+;          DbContext.Add(id, entity);
         }
 
         public void Update(Peripheral entity)
