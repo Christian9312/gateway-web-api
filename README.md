@@ -202,3 +202,7 @@ body:
 #### Delete peripherals
 
 DELETE  `/peripherals/id`  
+
+
+
+Build-automation in `.github\workflows\build-flow.yml` file in repo
