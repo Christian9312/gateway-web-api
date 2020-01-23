@@ -76,7 +76,7 @@ This repository contains an xUnit.NET test library. Change directory to the test
 
   
 
-Get to `/gateways`
+Get to `/gateway`
 
   
 
@@ -84,7 +84,7 @@ Get to `/gateways`
 
   
 
-Get to `/gateways/id`
+Get to `/gateway/id`
 
   
 
@@ -93,7 +93,7 @@ Get to `/gateways/id`
 
   
 
-POST to `/gateways`  
+POST to `/gateway`  
 
 
 ```
@@ -110,7 +110,7 @@ body:
 ```
 #### Update gateway
 
-PUT to `/gateways/id`  
+PUT to `/gateway/id`  
 ```
 body:
 
@@ -126,7 +126,7 @@ body:
 
 #### Delete gateway
 
-DELETE  `/gateways/id`  
+DELETE  `/gateway/id`  
 
 
 
@@ -142,7 +142,7 @@ DELETE  `/gateways/id`
 
   
 
-Get to `/peripherals`
+Get to `/peripheral`
 
   
 
@@ -150,7 +150,7 @@ Get to `/peripherals`
 
   
 
-Get to `/peripherals/id`
+Get to `/peripheral/id`
 
   
 
@@ -159,7 +159,7 @@ Get to `/peripherals/id`
 
   
 
-POST to `/peripherals`  
+POST to `/peripheral`  
 
 
 ```
@@ -181,7 +181,7 @@ body:
 ```
 #### Update peripherals
 
-PUT to `/peripherals/id`  
+PUT to `/peripheral/id`  
 ```
 body:
 
@@ -201,7 +201,7 @@ body:
 
 #### Delete peripherals
 
-DELETE  `/peripherals/id`  
+DELETE  `/peripheral/id`  
 
 
 
