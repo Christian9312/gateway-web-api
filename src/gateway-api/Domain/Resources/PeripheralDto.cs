@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Gateways.Domain.Resources
 {
-    public class PeripheralCreationDto
+    public class PeripheralDto
     {
         [StringLength(60, ErrorMessage = "Vendor can't be longer than 60 characters")]
         public string Vendor { get; set; }
@@ -18,6 +18,7 @@ namespace Gateways.Domain.Resources
         [Required(ErrorMessage = "Status is required")]
         public PeripheralStatus? Status { get; set; }
 
+        [Required]
         public string GatewayId { get; set; }
     }
 }

@@ -16,7 +16,7 @@ namespace Gateways.Domain.Mapping
                 opt => opt.MapFrom(src => src.Status.ToDescriptionString()));
             CreateMap<Peripheral,PeripheralSimpleDto>().ForMember(src => src.Status,
                 opt => opt.MapFrom(src => src.Status.ToDescriptionString()));
-            CreateMap<Gateway, GatewayCreationDto>();
+            CreateMap<Gateway, GatewayDto>();
             CreateMap<Gateway, GatewayDetailedDto>();
             CreateMap<Gateway, GatewaySimpleDto>();
         }

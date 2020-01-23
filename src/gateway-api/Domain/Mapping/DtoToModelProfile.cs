@@ -12,10 +12,9 @@ namespace Gateways.Domain.Mapping
         public DtoToModelProfile()
         {
             CreateMap<PeripheralDetailedDto, Peripheral>();
-            CreateMap<PeripheralCreationDto, Peripheral>();
+            CreateMap<PeripheralDto, Peripheral>();
             CreateMap<GatewayDetailedDto, Gateway>();
-            CreateMap<GatewayCreationDto, Gateway>();
-            CreateMap<GatewayUpdateDto, Gateway>();
+            CreateMap<GatewayDto, Gateway>();
         }
     }
 }

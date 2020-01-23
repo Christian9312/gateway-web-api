@@ -44,7 +44,7 @@ namespace Gateways.Controllers
         }
 
         [HttpPost(Name ="PeripheralCreation")]
-        public async Task<IActionResult> CreatePeripheral([FromBody] PeripheralCreationDto peripheralDto)
+        public async Task<IActionResult> CreatePeripheral([FromBody] PeripheralDto peripheralDto)
         {
             if (peripheralDto == null)
             {
@@ -55,7 +55,7 @@ namespace Gateways.Controllers
                 return BadRequest("Invalid model object");
             }
 
-            var peripheralEntity = mapper.Map<PeripheralCreationDto,Peripheral>(peripheralDto);
+            var peripheralEntity = mapper.Map<PeripheralDto,Peripheral>(peripheralDto);
 
             var gateway = await repoWrapper.Gateway.GetGatewayById(peripheralEntity.GatewayId);
             if (gateway == null)
@@ -71,11 +71,11 @@ namespace Gateways.Controllers
 
             var peripheral = mapper.Map<Peripheral, PeripheralDetailedDto>(peripheralEntity);
 
-            return Ok(peripheral);
+            return CreatedAtRoute("PeripheralById",new {id = peripheralEntity.UId},peripheral);
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult> UpdateGateway(uint id, [FromBody] PeripheralCreationDto peripheralDto)
+        public async Task<ActionResult> UpdatePeripheral(uint id, [FromBody] PeripheralDto peripheralDto)
         {
             if (peripheralDto == null)
             {
@@ -110,7 +110,7 @@ namespace Gateways.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<ActionResult> DeleteGateway(uint id)
+        public async Task<ActionResult> DeletePeripheral(uint id)
         {
             var peripheralEntity = await repoWrapper.Peripheral.GetPeripheralById(id);
             if (peripheralEntity == null)

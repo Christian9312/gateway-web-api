@@ -15,11 +15,11 @@ namespace gateway_api_tests
 {
     public class GatewayControllerTests
     {
-        private IRepositoryWrapper repoWrapper;
-        private IMapper mapper;
+        private readonly IRepositoryWrapper repoWrapper;
+        private readonly IMapper mapper;
 
 
-        private GatewayController controller;
+        private readonly GatewayController controller;
 
         public GatewayControllerTests()
         {
@@ -34,7 +34,7 @@ namespace gateway_api_tests
         }
 
         [Fact]
-        public async Task SuccessGetAllGateways()
+        public async Task GetAllGateways_Success()
         {
             var result = await controller.GetGateways();
 
@@ -46,9 +46,9 @@ namespace gateway_api_tests
         }
 
         [Fact]
-        public async Task NotFoundGateways()
+        public async Task GetAllGateways_ReturnsNotFound()
         {
-            var testSerialNumber = "7879-4667-4233-2310";
+            const string testSerialNumber = "7879-4667-4233-2310";
 
             var result = await controller.GetGatewayById(testSerialNumber);
 
@@ -56,9 +56,9 @@ namespace gateway_api_tests
         }
 
         [Fact]
-        public async Task GetExistingGateway()
+        public async Task GetExistingGateway_ReturnsCorrectItem()
         {
-            var testSerialNumber = "6521-1434-3451-4531";
+            const string testSerialNumber = "6521-1434-3451-4531";
 
             var result = await controller.GetGatewayById(testSerialNumber);
 
@@ -70,18 +70,18 @@ namespace gateway_api_tests
         }
 
         [Fact]
-        public async Task CreateValidResponse()
+        public async Task CreateGateway_ResultOK()
         {
-            var correctGateway = new GatewayCreateDto{SerialNumber = "5454-8768-3423-3241", Name = "Network 1",Address = "192.168.1.1"};
+            var correctGateway = new GatewayDto{Name = "Network 1",Address = "192.168.1.1"};
             var result = await controller.CreateGateway(correctGateway);
 
             Assert.IsType<CreatedAtRouteResult>(result);
         }
 
         [Fact]
-        public async Task CreateValidGateway()
+        public async Task CreateValidGateway_AddItem()
         {
-            var correctGateway = new GatewayCreateDto{SerialNumber = "5454-8768-3423-3241", Name = "Network 1",Address = "192.168.1.1"};
+            var correctGateway = new GatewayDto{Name = "Network 1",Address = "192.168.1.1"};
             await controller.CreateGateway(correctGateway);
             
             var getResult = await controller.GetGateways();
@@ -95,15 +95,15 @@ namespace gateway_api_tests
         }
 
         [Fact]
-        public async Task NotCreateInvalidGateway()
+        public async Task CreateGateway_ReturnsBadRequest()
         {
-            var missingSerialGateway = new GatewayCreateDto
+            var missingSerialGateway = new GatewayDto
                 {
                     Name = "Network 1", 
-                    Address = "192.168.1.65"
+                    Address = "192.168.1.665"
                 };
 
-            controller.ModelState.AddModelError("Serial number", "Required");
+            controller.ModelState.AddModelError("Address", "Not valid");
             var result = await controller.CreateGateway(missingSerialGateway);
 
             Assert.IsType<BadRequestObjectResult>(result);
