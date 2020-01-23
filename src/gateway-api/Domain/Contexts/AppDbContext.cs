@@ -38,16 +38,17 @@ namespace Gateways.Domain.Contexts
             builder.Entity<Peripheral>().Property(p => p.CreationDate).IsRequired();
             builder.Entity<Peripheral>().Property(p => p.Status).IsRequired();
 
+            var guid = Guid.NewGuid().ToString();
             builder.Entity<Gateway>().HasData
             (
-                new Gateway { SerialNumber = "213213213", Name = "Bad gateway", Address = "192.168.1.1" , AssociatedPeripherals = new List<Peripheral>()},
-                new Gateway { SerialNumber = "232323243", Name = "Good gateway", Address = "192.168.1.2", AssociatedPeripherals = new List<Peripheral>()}
+                new Gateway { SerialNumber = Guid.NewGuid().ToString(), Name = "Bad gateway", Address = "192.168.1.1" , AssociatedPeripherals = new List<Peripheral>()},
+                new Gateway { SerialNumber = guid, Name = "Good gateway", Address = "192.168.1.2", AssociatedPeripherals = new List<Peripheral>()}
             );
 
             builder.Entity<Peripheral>().HasData
             (
-                new Peripheral() { UId = uint.MaxValue, CreationDate = DateTimeOffset.Now, Status = PeripheralStatus.Offline, Vendor =  "ME", GatewayId = "213213213"},
-                new Peripheral() { UId = uint.MaxValue-1 , CreationDate = DateTimeOffset.Now, Status = PeripheralStatus.Online, Vendor =  "You", GatewayId = "232323243"}
+                new Peripheral() { UId = uint.MaxValue, CreationDate = DateTimeOffset.Now, Status = PeripheralStatus.Offline, Vendor =  "ME", GatewayId = guid},
+                new Peripheral() { UId = uint.MaxValue-1 , CreationDate = DateTimeOffset.Now, Status = PeripheralStatus.Online, Vendor =  "You", GatewayId = guid}
             );
         }
     }
