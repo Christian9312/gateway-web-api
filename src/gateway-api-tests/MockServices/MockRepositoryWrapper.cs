@@ -7,19 +7,19 @@ using Gateways.Domain.Contracts;
 
 namespace gateway_api_tests
 {
-    public class FakeRepositoryWrapper:IRepositoryWrapper
+    public class MockRepositoryWrapper:IRepositoryWrapper
     {
         private IGatewayRepository gateway;
         private IPeripheralRepository peripheral;
 
-        public FakeRepositoryWrapper()
+        public MockRepositoryWrapper()
         { }
 
         public IGatewayRepository Gateway =>
-            gateway ?? (gateway = new FakeGatewayRepository());
+            gateway ?? (gateway = new MockGatewayRepository());
 
         public IPeripheralRepository Peripheral =>
-            peripheral ?? (peripheral = new FakePeripheralRepository());
+            peripheral ?? (peripheral = new MockPeripheralRepository());
         public async Task<Response> SaveAsync()
         {
             return await Task.FromResult(new Response(true, string.Empty));

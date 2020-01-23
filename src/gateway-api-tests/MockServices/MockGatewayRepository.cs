@@ -9,7 +9,7 @@ using Gateways.Domain.Contracts;
 
 namespace gateway_api_tests
 {
-    public class FakeGatewayRepository : IGatewayRepository
+    public class MockGatewayRepository : IGatewayRepository
     {
         private Dictionary<string, Gateway> DbContext { get; } = new Dictionary<string, Gateway>
         {

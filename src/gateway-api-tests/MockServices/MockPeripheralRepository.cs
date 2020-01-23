@@ -9,7 +9,7 @@ using Gateways.Domain.Contracts;
 
 namespace gateway_api_tests
 {
-    public class FakePeripheralRepository:IPeripheralRepository
+    public class MockPeripheralRepository:IPeripheralRepository
     {
         private Dictionary<uint, Peripheral> DbContext { get; } = new Dictionary<uint, Peripheral>
         {

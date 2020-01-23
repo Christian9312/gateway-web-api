@@ -29,7 +29,7 @@ namespace gateway_api_tests
                 opt.AddProfile(typeof(ModelToDtoProfile));
             });
             this.mapper = config.CreateMapper();
-            this.repoWrapper = new FakeRepositoryWrapper();
+            this.repoWrapper = new MockRepositoryWrapper();
             this.controller = new GatewayController(repoWrapper, mapper);
         }
 

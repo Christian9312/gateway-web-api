@@ -21,7 +21,6 @@ namespace peripheral_api_tests
         private readonly IRepositoryWrapper repoWrapper;
         private readonly IMapper mapper;
 
-
         private readonly PeripheralController controller;
 
         public PeripheralControllerTests()
@@ -32,7 +31,7 @@ namespace peripheral_api_tests
                 opt.AddProfile(typeof(ModelToDtoProfile));
             });
             this.mapper = config.CreateMapper();
-            this.repoWrapper = new FakeRepositoryWrapper();
+            this.repoWrapper = new MockRepositoryWrapper();
             this.controller = new PeripheralController(repoWrapper, mapper);
         }
 
