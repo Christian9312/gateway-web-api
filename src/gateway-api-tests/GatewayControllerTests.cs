@@ -109,6 +109,71 @@ namespace gateway_api_tests
             Assert.IsType<BadRequestObjectResult>(result);
         }
 
-       
+        [Fact]
+        public async Task UpdateGateway__ReturnsOk()
+        {
+            const string id = "6521-1434-3451-4531";
+            var inputGateway = new GatewayDto{Name = "Network one", Address = "192.168.1.11"};
+            var updateResult = await controller.UpdateGateway(id, inputGateway);
+            
+            Assert.IsType<OkObjectResult>(updateResult);
+        }
+
+        [Fact]
+        public async Task UpdateGateway__ReturnsUpdatedItem()
+        {
+            const string id = "6521-1434-3451-4531";
+            var inputGateway = new GatewayDto{Name = "Network one", Address = "192.168.1.11"};
+            await controller.UpdateGateway(id, inputGateway);
+
+            var getAction = await controller.GetGatewayById(id);
+
+            var okGetResult = getAction.Result as OkObjectResult;
+
+            var updatedGatewayDb = okGetResult?.Value as GatewayDetailedDto;
+
+            Assert.Equal(updatedGatewayDb?.Name, inputGateway.Name);
+            Assert.Equal(updatedGatewayDb?.Address, inputGateway.Address);
+        }
+
+        [Fact]
+        public async Task DeleteGateway_ReturnsOk()
+        {
+            const string id = "6521-1434-3451-4531";
+            var deletedResult = await controller.DeleteGateway(id);
+            
+            Assert.IsType<OkObjectResult>(deletedResult);
+        }
+
+        [Fact]
+        public async Task DeleteGateway_RemoveOneItem()
+        {
+            const string id = "6521-1434-3451-4531";
+            await controller.DeleteGateway(id);
+            
+            var getAction = await controller.GetGatewayById(id);
+
+            Assert.IsType<NotFoundResult>(getAction.Result);
+
+            var getResult = await controller.GetGateways();
+
+            var okResult = getResult.Result as OkObjectResult;
+
+            var items = okResult?.Value as IEnumerable<GatewayDetailedDto>;
+
+            Assert.Equal(3, items?.Count());
+
+        }
+
+        [Fact]
+        public async Task DeleteGatewayWithPeripheral_ReturnsBadRequest()
+        {
+            const string id = "4451-9834-7885-3446";
+            
+            var deletedResult = await controller.DeleteGateway(id);
+
+            Assert.IsType<BadRequestObjectResult>(deletedResult);
+
+        }
     }
 }
