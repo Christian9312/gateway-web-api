@@ -10,7 +10,7 @@ REST service (JSON/HTTP) for storing information about gateways and their associ
 
   
 
-Change directory to the api directory (\gateway-api)
+Change directory to the api directory (src\gateway-api)
 
 ### Restore command (this resolves all NuGet packages)
 
@@ -44,7 +44,7 @@ Service will start on `https://localhost:5001`
 
   
 
-This repository contains an xUnit.NET test library. Change directory to the tests directory (\gateway-api-tests)
+This repository contains an xUnit.NET test library. Change directory to the tests directory (src\gateway-api-tests)
 
 
 ### Restore command
